@@ -1,0 +1,42 @@
+/**home.wxss**/
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo{
+  margin-top: 40rpx;
+  height: 140rpx;
+  width: 90%;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userinfo-userhead {
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 100rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+
+.userinfo-userhead[size] {
+  width: 100rpx;
+}
+
+.userinfo-username {
+  font-size: 32rpx;
+  color: #007aff;
+  background-color: #f6f6f6;
+  background-size: cover;
+  text-align: center;
+  margin-left: 100px;
+  flex: auto;
+}

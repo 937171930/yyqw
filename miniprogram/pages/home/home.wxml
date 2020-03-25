@@ -1,0 +1,12 @@
+<!-- 获取用户的姓名和头像 -->
+<view class="userinfo"> 
+  <button 
+    class="userinfo-userhead" 
+    style="background-image: url({{avatarUrl}})"
+    size="default"
+  ></button>
+  <button 
+    class="userinfo-username">
+    {{nickName}}
+  </button>
+</view>
