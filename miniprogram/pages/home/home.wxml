@@ -1,12 +1,31 @@
 <!-- 获取用户的姓名和头像 -->
 <view class="userinfo"> 
   <button 
+    open-type="getUserInfo"
+    bindgetuserinfo="getUserInfo"
     class="userinfo-userhead" 
     style="background-image: url({{avatarUrl}})"
     size="default"
   ></button>
+</view>
+
+<view class="userfont"> 
   <button 
-    class="userinfo-username">
-    {{nickName}}
+      class="userfont-username">
+      {{metoo}}
+  </button>
+</view>
+
+<view class="userfont1"> 
+  <button 
+      class="userfont-username1">
+      {{nickName}}
+  </button>
+</view>
+
+<view class="userfont2"> 
+  <button 
+      class="userfont-username">
+      {{welcome}}
   </button>
 </view>

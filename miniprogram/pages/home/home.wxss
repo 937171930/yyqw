@@ -8,9 +8,39 @@ page {
 }
 
 .userinfo{
-  margin-top: 40rpx;
+  margin-top: 160rpx;
   height: 140rpx;
-  width: 90%;
+  width: 100%;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userfont{
+  margin-top: 60rpx;
+  width: 100%;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userfont1{
+  margin-top: 60rpx;
+  width: 100%;
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userfont2{
+  margin-top: 20rpx;
+  width: 100%;
   background: #f6f6f6;
   display: flex;
   flex-direction: row;
@@ -31,12 +61,22 @@ page {
   width: 100rpx;
 }
 
-.userinfo-username {
+.userfont-username {
   font-size: 32rpx;
   color: #007aff;
   background-color: #f6f6f6;
   background-size: cover;
   text-align: center;
   margin-left: 100px;
-  flex: auto;
+  flex: 1;
+}
+
+.userfont-username1 {
+  font-size: 32rpx;
+  color: #00ff95;
+  background-color: #f6f6f6;
+  background-size: cover;
+  text-align: center;
+  margin-left: 100px;
+  flex: 1;
 }
