@@ -59,18 +59,26 @@ Page({
       }
     })
 
+    // 调用云函数,获取openid
+    wx.cloud.callFunction({
+      name: 'createCollection',
+      data: {
+        name: "os-aX5NDM3ieii81iVdlL3uyFYio"
+      },
+      success: res => {
+        console.log('[云函数] [createCollection] 调用成功')
+      },
+      fail: err => {
+        console.error('[云函数] [createCollection] 调用失败')
+      }
+    })
+
     /******* 用户注册 *******/
     db.collection('users').where({
-      _openid: this.data.openid
+      _openid: app.globalData.openid
     }).get({
       success: res => {
         console.log('[数据库] [查询记录] 成功: ', res)
-        var lastLoadDate = 'listData[6]';
-        var registerDate = 'listData[4]';
-        this.setData({
-          [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
-          [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
-        })
         var TIME = new Date();
         const year = TIME.getFullYear().toString();
         const month = (TIME.getMonth() + 1 < 10) ? '0' + (TIME.getMonth() + 1).toString() : (TIME.getMonth() + 1).toString();
@@ -81,6 +89,12 @@ Page({
         const formatDate = [year, month, day].join('.') + ' ' + [hour, munite, second].join(':');
         if(res.data.length!=0){
           console.log('该用户已注册,更新数据库记录.')
+          var lastLoadDate = 'listData[6]';
+          var registerDate = 'listData[4]';
+          this.setData({
+            [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
+            [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
+          })
           db.collection('users').doc(res.data[0]._id).update({
             data: {
               lastLoadDate: formatDate.toString()

@@ -13,6 +13,11 @@ App({
         env: 'yyqw-init',
         traceUser: true,
       })
+
+      const db = wx.cloud.database()
+      exports.main = async (event, context) => {
+        return await db.createCollection('todos')
+      }
     }
 
     this.globalData = {}
