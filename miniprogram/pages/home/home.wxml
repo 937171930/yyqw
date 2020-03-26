@@ -32,7 +32,7 @@
 
 <view wx:if="{{nickName}}"
   class="table">
-  <block wx:for="{{listData}}" wx:key="{[code]}">
+  <block wx:for="{{listData}}" wx:key="code">
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td-1" selectable="true">{{item.code}}</view>
       <view class="td-2" selectable="true" scroll-y="true" >

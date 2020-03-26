@@ -9,5 +9,6 @@
     "navigationBarTitleText": "e游趣玩",
     "navigationBarTextStyle": "black"
   },
-  "style": "v2"
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
 }

@@ -46,91 +46,169 @@ Page({
       }
     })
 
-    // 调用云函数,获取openid
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] 调用成功 openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
+    /******* 用户数据库处理 *******/
+    if (app.globalData.openid != ''){
+      db.collection('users').where({
+        _openid: app.globalData.openid
+      }).get({
+        success: res => {
+          console.log('[数据库] [查询记录] 成功: ', res)
 
-    // 调用云函数,获取openid
-    wx.cloud.callFunction({
-      name: 'createCollection',
-      data: {
-        name: "os-aX5NDM3ieii81iVdlL3uyFYio"
-      },
-      success: res => {
-        console.log('[云函数] [createCollection] 调用成功')
-      },
-      fail: err => {
-        console.error('[云函数] [createCollection] 调用失败')
-      }
-    })
+          /*******获取当前时间，并作格式化处理********/
+          var TIME = new Date();
+          const year = TIME.getFullYear().toString();
+          const month = (TIME.getMonth() + 1 < 10) ? '0' + (TIME.getMonth() + 1).toString() : (TIME.getMonth() + 1).toString();
+          const day = (TIME.getDate() < 10) ? '0' + TIME.getDate().toString() : TIME.getDate().toString();
+          const hour = (TIME.getHours() < 10) ? '0' + TIME.getHours().toString() : TIME.getHours().toString();
+          const munite = (TIME.getMinutes() < 10) ? '0' + TIME.getMinutes().toString() : TIME.getMinutes().toString();
+          const second = (TIME.getSeconds() < 10) ? '0' + TIME.getSeconds().toString() : TIME.getSeconds().toString();
+          const formatDate = [year, month, day].join('.') + ' ' + [hour, munite, second].join(':');
 
-    /******* 用户注册 *******/
-    db.collection('users').where({
-      _openid: app.globalData.openid
-    }).get({
-      success: res => {
-        console.log('[数据库] [查询记录] 成功: ', res)
-        var TIME = new Date();
-        const year = TIME.getFullYear().toString();
-        const month = (TIME.getMonth() + 1 < 10) ? '0' + (TIME.getMonth() + 1).toString() : (TIME.getMonth() + 1).toString();
-        const day = (TIME.getDate() < 10) ? '0' + TIME.getDate().toString() : TIME.getDate().toString();
-        const hour = (TIME.getHours() < 10) ? '0' + TIME.getHours().toString() : TIME.getHours().toString();
-        const munite = (TIME.getMinutes() < 10) ? '0' + TIME.getMinutes().toString() : TIME.getMinutes().toString();
-        const second = (TIME.getSeconds() < 10) ? '0' + TIME.getSeconds().toString() : TIME.getSeconds().toString();
-        const formatDate = [year, month, day].join('.') + ' ' + [hour, munite, second].join(':');
-        if(res.data.length!=0){
-          console.log('该用户已注册,更新数据库记录.')
-          var lastLoadDate = 'listData[6]';
-          var registerDate = 'listData[4]';
-          this.setData({
-            [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
-            [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
-          })
-          db.collection('users').doc(res.data[0]._id).update({
-            data: {
-              lastLoadDate: formatDate.toString()
-            },
+          /*******判断数据库查询结果，判定是否为新用户注册*******/
+          if (res.data.length != 0) {     //不是新用户
+            console.log('该用户已注册,更新数据库记录.')
+            var lastLoadDate = 'listData[6]';
+            var registerDate = 'listData[4]';
+            this.setData({
+              [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
+              [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
+            })
+
+            // 调用云函数,更新数据库字段
+            wx.cloud.callFunction({
+              name: 'queryDatabase',
+              data: {
+                databaseName: "users",
+                id: res.data[0]._id,
+                key1: "lastLoadDate",
+                value1: formatDate.toString(),
+                key2: "nickName",
+                value2: this.data.nickName
+              },
+              success: res => {
+                console.log('[云函数] [queryDatabase] 调用成功')
+              },
+              fail: err => {
+                console.error('[云函数] [queryDatabase] 调用失败')
+              }
+            })
+          }
+          else {   //新用户
+            console.log('新用户，新增数据库记录.')
+            var lastLoadDate = 'listData[6]';
+            var registerDate = 'listData[4]';
+            this.setData({
+              [lastLoadDate]: { code: "最后登陆日期", text: formatDate.toString() },
+              [registerDate]: { code: "注册日期", text: formatDate.toString() },
+            })
+
+            db.collection('users').add({  //在数据库中新增记录
+              data: {
+                nickName: this.data.nickName,
+                level: 0,
+                totalPay: 0.00,
+                nextLevel: 30.00,
+                registerDate: formatDate.toString(),
+                lastPayDate: '-',
+                lastLoadDate: formatDate.toString()
+              },
+              success: res => {
+                console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+              },
+              fail: err => {
+                console.error('[数据库] [新增记录] 失败：', err)
+              }
+            })
+          }
+        },
+        fail: err => {
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })
+    }
+    else{
+      app.openidCallback = openid => {  //回调方法，保证方法内语句在onlaunch之后执行
+        if (openid != ''){
+          db.collection('users').where({
+            _openid: openid
+          }).get({
             success: res => {
-              console.log('[数据库] [更新记录] 成功.')
+              console.log('[数据库] [查询记录] 成功: ', res)
+
+              /*******获取当前时间，并作格式化处理********/
+              var TIME = new Date();
+              const year = TIME.getFullYear().toString();
+              const month = (TIME.getMonth() + 1 < 10) ? '0' + (TIME.getMonth() + 1).toString() : (TIME.getMonth() + 1).toString();
+              const day = (TIME.getDate() < 10) ? '0' + TIME.getDate().toString() : TIME.getDate().toString();
+              const hour = (TIME.getHours() < 10) ? '0' + TIME.getHours().toString() : TIME.getHours().toString();
+              const munite = (TIME.getMinutes() < 10) ? '0' + TIME.getMinutes().toString() : TIME.getMinutes().toString();
+              const second = (TIME.getSeconds() < 10) ? '0' + TIME.getSeconds().toString() : TIME.getSeconds().toString();
+              const formatDate = [year, month, day].join('.') + ' ' + [hour, munite, second].join(':');
+
+              /*******判断数据库查询结果，判定是否为新用户注册*******/
+              if (res.data.length != 0) {     //不是新用户
+                console.log('该用户已注册,更新数据库记录.')
+                var lastLoadDate = 'listData[6]';
+                var registerDate = 'listData[4]';
+                this.setData({
+                  [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
+                  [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
+                })
+
+                // 调用云函数,更新数据库字段
+                wx.cloud.callFunction({
+                  name: 'queryDatabase',
+                  data: {
+                    databaseName: "users",
+                    id: res.data[0]._id,
+                    key1: "lastLoadDate",
+                    value1: formatDate.toString(),
+                    key2: "nickName",
+                    value2: this.data.nickName
+                  },
+                  success: res => {
+                    console.log('[云函数] [queryDatabase] 调用成功')
+                  },
+                  fail: err => {
+                    console.error('[云函数] [queryDatabase] 调用失败')
+                  }
+                })
+              }
+              else {   //新用户
+                console.log('新用户，新增数据库记录.')
+                var lastLoadDate = 'listData[6]';
+                var registerDate = 'listData[4]';
+                this.setData({
+                  [lastLoadDate]: { code: "最后登陆日期", text: formatDate.toString() },
+                  [registerDate]: { code: "注册日期", text: formatDate.toString() },
+                })
+
+                db.collection('users').add({  //在数据库中新增记录
+                  data: {
+                    nickName: this.data.nickName,
+                    level: 0,
+                    totalPay: 0.00,
+                    nextLevel: 30.00,
+                    registerDate: formatDate.toString(),
+                    lastPayDate: '-',
+                    lastLoadDate: formatDate.toString()
+                  },
+                  success: res => {
+                    console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                  },
+                  fail: err => {
+                    console.error('[数据库] [新增记录] 失败：', err)
+                  }
+                })
+              }
             },
             fail: err => {
-              console.error('[数据库] [更新记录] 失败：', err)
+              console.error('[数据库] [查询记录] 失败：', err)
             }
           })
         }
-        else{
-          console.log('新用户，新增数据库记录.')
-          db.collection('users').add({
-            data: {
-              level: 0,
-              totalPay: 0.00,
-              nextLevel: 30.00,
-              registerDate: formatDate.toString(),
-              lastPayDate: '-',
-              lastLoadDate: formatDate.toString()
-            },
-            success: res => {
-              console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
-            },
-            fail: err => {
-              console.error('[数据库] [新增记录] 失败：', err)
-            }
-          })
-        }
-      },
-      fail: err => {
-        console.error('[数据库] [查询记录] 失败：', err)
       }
-    })
+    }
   },
 
   onGetUserInfo: function (e) {

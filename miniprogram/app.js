@@ -13,13 +13,26 @@ App({
         env: 'yyqw-init',
         traceUser: true,
       })
-
-      const db = wx.cloud.database()
-      exports.main = async (event, context) => {
-        return await db.createCollection('todos')
-      }
     }
 
-    this.globalData = {}
+    this.globalData = {
+      openid: ''
+    };
+
+    // 调用云函数,获取openid
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] 调用成功 openid: ', res.result.openid)
+        this.globalData.openid = res.result.openid
+        if(this.openidCallback){
+          this.openidCallback(res.result.openid);
+        }
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
   }
 })
