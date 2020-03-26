@@ -107,7 +107,7 @@ page {
 }
 
 .td-1 {
-  width:40%;
+  width:30%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -117,7 +117,7 @@ page {
 }
 
 .td-2 {
-  width:60%;
+  width:70%;
   justify-content: center;
   display: flex;
   flex-direction: column;
