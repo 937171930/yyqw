@@ -2,7 +2,7 @@
 <view class="userinfo"> 
   <button 
     open-type="getUserInfo"
-    bindgetuserinfo="getUserInfo"
+    bindgetuserinfo="onGetUserInfo"
     class="userinfo-userhead" 
     style="background-image: url({{avatarUrl}})"
     size="default"
@@ -16,16 +16,36 @@
   </button>
 </view>
 
-<view class="userfont1"> 
+<!-- <view class="userfont1"> 
   <button 
       class="userfont-username1">
       {{nickName}}
   </button>
-</view>
+</view> -->
 
 <view class="userfont2"> 
   <button 
       class="userfont-username">
       {{welcome}}
   </button>
+</view>
+
+<view wx:if="{{nickName}}"
+  class="table">
+  <block wx:for="{{listData}}" wx:key="{[code]}">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="td-1" selectable="true">{{item.code}}</view>
+      <view class="td-2" selectable="true" scroll-y="true" >
+        <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{item.text}}
+        </text>
+      </view>
+    </view>
+    <view class="tr bg-g2" wx:else>
+      <view class="td-1" selectable="true">{{item.code}}</view>
+      <view class="td-2" selectable="true" scroll-y="true" >
+        <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{item.text}}
+        </text>
+      </view>
+    </view>
+  </block>
 </view>
