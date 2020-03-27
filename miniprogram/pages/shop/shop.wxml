@@ -1,9 +1,8 @@
-<!-- <view class="bottomBar"> -->
-  <!-- 以下是对一个自定义组件的引用 -->
-  <!-- <bar 
+<!-- <view class="bottomBar">
+  <top-bar 
     items="{{['首页', '分类', '购物车', '我的']}}"
-    binditemtap="changeName1"
-  ></bar>
+    binditemtap="changeName"
+  ></top-bar>
 </view>
 
 <swiper current="{{currentData1}}" class='swiper' style="height:600rpx;" duration="300">
@@ -15,12 +14,12 @@
       <top-bar
         id="myComponent"
         items="{{items}}"
-        selected="{{currentData}}"
-        binditemtap="checkCurrent"
+        selected="{{currentDataTop}}"
+        binditemtap="checkCurrentTop"
       ></top-bar>
     </view>
 
-    <swiper current="{{currentData}}" class='swiper' style="height:300rpx;" duration="300" bindchange="bindchange">
+    <swiper current="{{currentDataTop}}" class='swiper' style="height:300rpx;" duration="300" bindchange="bindchangeTop">
       <swiper-item><view class='swiper_con'>welcome come to 代理专区</view></swiper-item>
       <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
       <swiper-item><view class='swiper_con'>welcome come to 小蜜专区</view></swiper-item> 
@@ -39,3 +38,17 @@
   <swiper-item>
   </swiper-item>
 </swiper> -->
+
+<view class='topTabSwiper'>
+    <view class='tab  {{currentDataBottom == 0 ? "tabBorer" : ""}}'  data-current = "0" bindtap='checkCurrentBottom'>首页</view>
+    <view class='tab  {{currentDataBottom == 1 ? "tabBorer" : ""}}'  data-current = "1" bindtap='checkCurrentBottom'>分类</view>
+    <view class='tab  {{currentDataBottom == 2 ? "tabBorer" : ""}}'  data-current = "2" bindtap='checkCurrentBottom'>购物车</view>
+    <view class='tab  {{currentDataBottom == 3 ? "tabBorer" : ""}}'  data-current = "3" bindtap='checkCurrentBottom'>我的</view>
+</view>
+
+<swiper current="{{currentDataBottom}}" class='swiper' style="height:600px;" duration="300" bindchange="bindchangeBottom">
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item> 
+  <swiper-item></swiper-item> 
+</swiper>
