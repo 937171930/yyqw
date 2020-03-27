@@ -3,25 +3,27 @@ const app = getApp()
 const db = wx.cloud.database()
 const Img2Base64 = require('../../constants/img2Base64.js');
 var idinfolist = [
-  { code: "用户", text: '0.00' },
+  { code: "用户", text: '' },
   { code: "用户等级", text: '普通用户' },
-  { code: "累计消费", text: '0.00' },
-  { code: "距离下一等级", text: '30.00' },
-  { code: "注册日期", text: '2020.03.26' },
+  { code: "累计消费", text: '0' },
+  { code: "距离下一等级", text: '30' },
+  { code: "注册日期", text: '' },
   { code: "最后消费日期", text: '-' },
-  { code: "最后登录日期", text: '2020.03.26' }
+  { code: "最后登录日期", text: '' }
 ]
 
 Page({
   data: {
     avatarUrl: Img2Base64.homeBg[0],
+    backgroundImageUrl: Img2Base64.homeBg[1],
     metoo: '请点击上方头像授权登录.',
     nickName: '',
     welcome: '',
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: idinfolist,
-    openid: ''
+    openid: '',
+    enter: ''
   },
 
   onLoad: function () {
@@ -31,14 +33,14 @@ Page({
         if (res.authSetting['scope.userInfo']) { // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框 
           wx.getUserInfo({
             success: res => {
-              var string = 'listData[0]';
               this.setData({
                 metoo: 'Hello!',
                 avatarUrl: res.userInfo.avatarUrl,
                 nickName: res.userInfo.nickName,
                 welcome: '欢迎使用e游趣玩公众平台!',
-                [string]: { code: "用户", text: res.userInfo.nickName},
-                hasUserInfo: true
+                ['listData[0]']: { code: "用户", text: res.userInfo.nickName},
+                hasUserInfo: true,
+                enter: '进入商城'
               })
             }
           })
@@ -67,11 +69,13 @@ Page({
           /*******判断数据库查询结果，判定是否为新用户注册*******/
           if (res.data.length != 0) {     //不是新用户
             console.log('该用户已注册,更新数据库记录.')
-            var lastLoadDate = 'listData[6]';
-            var registerDate = 'listData[4]';
             this.setData({
-              [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
-              [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
+              ["listData[1]"]: { code: "用户等级", text: res.data[0].level },
+              ["listData[2]"]: { code: "累计消费", text: res.data[0].totalPay },
+              ["listData[3]"]: { code: "距离下一等级", text: res.data[0].nextLevel },
+              ["listData[4]"]: { code: "注册日期", text: res.data[0].registerDate },
+              ["listData[5]"]: { code: "最后消费日期", text: res.data[0].lastPayDate },
+              ["listData[6]"]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },  
             })
 
             // 调用云函数,更新数据库字段
@@ -95,17 +99,15 @@ Page({
           }
           else {   //新用户
             console.log('新用户，新增数据库记录.')
-            var lastLoadDate = 'listData[6]';
-            var registerDate = 'listData[4]';
             this.setData({
-              [lastLoadDate]: { code: "最后登陆日期", text: formatDate.toString() },
-              [registerDate]: { code: "注册日期", text: formatDate.toString() },
+              ['listData[4]']: { code: "注册日期", text: formatDate.toString() },
+              ['listData[6]']: { code: "最后登陆日期", text: formatDate.toString() },       
             })
 
             db.collection('users').add({  //在数据库中新增记录
               data: {
                 nickName: this.data.nickName,
-                level: 0,
+                level: '普通用户',
                 totalPay: 0.00,
                 nextLevel: 30.00,
                 registerDate: formatDate.toString(),
@@ -146,13 +148,15 @@ Page({
               const formatDate = [year, month, day].join('.') + ' ' + [hour, munite, second].join(':');
 
               /*******判断数据库查询结果，判定是否为新用户注册*******/
+              console.log('该用户已注册,更新数据库记录.')
               if (res.data.length != 0) {     //不是新用户
-                console.log('该用户已注册,更新数据库记录.')
-                var lastLoadDate = 'listData[6]';
-                var registerDate = 'listData[4]';
                 this.setData({
-                  [lastLoadDate]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },
-                  [registerDate]: { code: "注册日期", text: res.data[0].registerDate },
+                  ["listData[1]"]: { code: "用户等级", text: res.data[0].level },
+                  ["listData[2]"]: { code: "累计消费", text: res.data[0].totalPay },
+                  ["listData[3]"]: { code: "距离下一等级", text: res.data[0].nextLevel },
+                  ["listData[4]"]: { code: "注册日期", text: res.data[0].registerDate },
+                  ["listData[5]"]: { code: "最后消费日期", text: res.data[0].lastPayDate },
+                  ["listData[6]"]: { code: "最后登陆日期", text: res.data[0].lastLoadDate },  
                 })
 
                 // 调用云函数,更新数据库字段
@@ -176,17 +180,15 @@ Page({
               }
               else {   //新用户
                 console.log('新用户，新增数据库记录.')
-                var lastLoadDate = 'listData[6]';
-                var registerDate = 'listData[4]';
                 this.setData({
-                  [lastLoadDate]: { code: "最后登陆日期", text: formatDate.toString() },
-                  [registerDate]: { code: "注册日期", text: formatDate.toString() },
+                  ['listData[4]']: { code: "注册日期", text: formatDate.toString() },
+                  ['listData[6]']: { code: "最后登陆日期", text: formatDate.toString() },   
                 })
 
                 db.collection('users').add({  //在数据库中新增记录
                   data: {
                     nickName: this.data.nickName,
-                    level: 0,
+                    level: '普通用户',
                     totalPay: 0.00,
                     nextLevel: 30.00,
                     registerDate: formatDate.toString(),
@@ -220,7 +222,8 @@ Page({
         nickName: e.detail.userInfo.nickName,
         welcome: '欢迎使用e游趣玩公众平台!',
         [string]: { code: "用户", text: e.detail.userInfo.nickName },
-        hasUserInfo: true
+        hasUserInfo: true,
+        enter: '进入商城'
       })
     }
   },

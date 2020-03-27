@@ -1,4 +1,11 @@
-<!-- 获取用户的姓名和头像 -->
+<view class='container'>
+  <image 
+    class='background' 
+    src="../../images/2.jpg" 
+    mode="aspectFill"
+  ></image>
+</view>
+
 <view class="userinfo"> 
   <button 
     open-type="getUserInfo"
@@ -15,13 +22,6 @@
       {{metoo}}
   </button>
 </view>
-
-<!-- <view class="userfont1"> 
-  <button 
-      class="userfont-username1">
-      {{nickName}}
-  </button>
-</view> -->
 
 <view class="userfont2"> 
   <button 
@@ -49,3 +49,10 @@
     </view>
   </block>
 </view>
+
+<!-- 进入商城 -->
+  <view class="uploader">
+    <navigator url="../shop/shop" open-type="navigate" class="uploader-text">
+      <text>{{enter}}</text>
+    </navigator>
+  </view>
