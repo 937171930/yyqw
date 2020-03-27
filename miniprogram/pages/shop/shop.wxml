@@ -1,0 +1,41 @@
+<!-- <view class="bottomBar"> -->
+  <!-- 以下是对一个自定义组件的引用 -->
+  <!-- <bar 
+    items="{{['首页', '分类', '购物车', '我的']}}"
+    binditemtap="changeName1"
+  ></bar>
+</view>
+
+<swiper current="{{currentData1}}" class='swiper' style="height:600rpx;" duration="300">
+  <swiper-item>
+  </swiper-item>
+
+  <swiper-item> -->
+    <view>
+      <top-bar
+        id="myComponent"
+        items="{{items}}"
+        selected="{{currentData}}"
+        binditemtap="checkCurrent"
+      ></top-bar>
+    </view>
+
+    <swiper current="{{currentData}}" class='swiper' style="height:300rpx;" duration="300" bindchange="bindchange">
+      <swiper-item><view class='swiper_con'>welcome come to 代理专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 小蜜专区</view></swiper-item> 
+      <swiper-item><view class='swiper_con'>welcome come to 莫愁如意专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 天机专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 答题器专区</view></swiper-item> 
+      <swiper-item><view class='swiper_con'>welcome come to 多开防封专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 打图工具专区</view></swiper-item>
+      <swiper-item><view class='swiper_con'>welcome come to 白号专区</view></swiper-item> 
+    </swiper>
+  <!-- </swiper-item>
+
+  <swiper-item>
+  </swiper-item>
+
+  <swiper-item>
+  </swiper-item>
+</swiper> -->

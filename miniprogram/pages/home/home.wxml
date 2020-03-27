@@ -51,8 +51,10 @@
 </view>
 
 <!-- 进入商城 -->
-  <view class="uploader">
-    <navigator url="../shop/shop" open-type="navigate" class="uploader-text">
-      <text>{{enter}}</text>
-    </navigator>
-  </view>
+<view class="uploader">
+  <navigator url="../shop/shop" open-type="navigate" class="uploader-text">
+    <text>{{enter}}</text>
+  </navigator>
+</view>
+
+

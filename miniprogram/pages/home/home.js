@@ -4,7 +4,7 @@ const db = wx.cloud.database()
 const Img2Base64 = require('../../constants/img2Base64.js');
 var idinfolist = [
   { code: "用户", text: '' },
-  { code: "用户等级", text: '普通用户' },
+  { code: "用户等级", text: 'Lv.0' },
   { code: "累计消费", text: '0' },
   { code: "距离下一等级", text: '30' },
   { code: "注册日期", text: '' },
@@ -188,7 +188,7 @@ Page({
                 db.collection('users').add({  //在数据库中新增记录
                   data: {
                     nickName: this.data.nickName,
-                    level: '普通用户',
+                    level: 'Lv.0',
                     totalPay: 0.00,
                     nextLevel: 30.00,
                     registerDate: formatDate.toString(),
