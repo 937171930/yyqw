@@ -38,17 +38,3 @@
   <swiper-item>
   </swiper-item>
 </swiper> -->
-
-<view class='topTabSwiper'>
-    <view class='tab  {{currentDataBottom == 0 ? "tabBorer" : ""}}'  data-current = "0" bindtap='checkCurrentBottom'>首页</view>
-    <view class='tab  {{currentDataBottom == 1 ? "tabBorer" : ""}}'  data-current = "1" bindtap='checkCurrentBottom'>分类</view>
-    <view class='tab  {{currentDataBottom == 2 ? "tabBorer" : ""}}'  data-current = "2" bindtap='checkCurrentBottom'>购物车</view>
-    <view class='tab  {{currentDataBottom == 3 ? "tabBorer" : ""}}'  data-current = "3" bindtap='checkCurrentBottom'>我的</view>
-</view>
-
-<swiper current="{{currentDataBottom}}" class='swiper' style="height:600px;" duration="300" bindchange="bindchangeBottom">
-  <swiper-item></swiper-item>
-  <swiper-item></swiper-item>
-  <swiper-item></swiper-item> 
-  <swiper-item></swiper-item> 
-</swiper>

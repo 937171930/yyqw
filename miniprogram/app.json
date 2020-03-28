@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/shop/shop"
+    "pages/shop/shop",
+    "pages/cart/cart",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -9,6 +11,37 @@
     "navigationBarBackgroundColor": "#00AAFF",
     "navigationBarTitleText": "e游趣玩",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#f00",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "/images/首页选中.jpg",
+        "iconPath": "/images/首页未选中.jpg",
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "/images/分类选中.jpg",
+        "iconPath": "/images/分类未选中.jpg",
+        "pagePath": "pages/shop/shop",
+        "text": "分类"
+      },
+      {
+        "selectedIconPath": "/images/购物车选中.jpg",
+        "iconPath": "/images/购物车未选中.jpg",
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "/images/我的选中.jpg",
+        "iconPath": "/images/我的未选中.jpg",
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

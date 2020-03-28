@@ -23,7 +23,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: idinfolist,
     openid: '',
-    enter: ''
   },
 
   onLoad: function () {
@@ -40,7 +39,6 @@ Page({
                 welcome: '欢迎使用e游趣玩公众平台!',
                 ['listData[0]']: { code: "用户", text: res.userInfo.nickName},
                 hasUserInfo: true,
-                enter: '进入商城'
               })
             }
           })
