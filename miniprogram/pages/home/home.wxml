@@ -40,7 +40,7 @@
         </text>
       </view>
     </view>
-    <view class="tr bg-g2" wx:else>
+    <view class="tr bg-g2" wx:else >
       <view class="td-1" selectable="true">{{item.code}}</view>
       <view class="td-2" selectable="true" scroll-y="true" >
         <text class="th-text" style="overflow-y:auto;overflow-x:scroll" selectable="true">{{item.text}}
