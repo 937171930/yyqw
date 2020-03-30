@@ -5,3 +5,11 @@
   align-items: center;
   box-sizing: border-box;
 } 
+
+
+.menu-item{  
+  width: 32%;  
+  float: left;  
+  text-align: center;  
+  padding-top: 20rpx;  
+} 

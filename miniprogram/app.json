@@ -13,9 +13,10 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#a9b7b7",
+    "color": "#99a7a7",
     "selectedColor": "#f00",
     "borderStyle": "white",
+    "position": "bottom",
     "list": [
       {
         "selectedIconPath": "/images/首页选中.jpg",
