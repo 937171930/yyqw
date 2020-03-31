@@ -1,11 +1,10 @@
-/**app.wxss**/
+/*app.wxss*/
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
 } 
-
 
 .menu-item{  
   width: 32%;  

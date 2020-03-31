@@ -8,7 +8,6 @@ Page({
   },
 
   onLoad: function () {
-
   },
 
   //获取当前滑块的index
@@ -51,6 +50,14 @@ Page({
 
       that.setData({
         currentDataBottom: event.target.dataset.current
+      })
+    }
+  },
+
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        currentTab: 1
       })
     }
   },

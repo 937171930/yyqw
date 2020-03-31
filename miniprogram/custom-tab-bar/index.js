@@ -1,24 +1,10 @@
-{
-  "pages": [
-    "pages/home/home",
-    "pages/shop/shop",
-    "pages/cart/cart",
-    "pages/mine/mine"
-  ],
-  "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#00AAFF",
-    "navigationBarTitleText": "e游趣玩",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "custom": true,
-    "color": "#000",
-    "selectedColor": "#f00",
-    "borderStyle": "white",
-    "position": "bottom",
-    "list": [
+// custom-tab-bar/index.js
+Component({
+  data: {
+    currentTab: 0,    // 默认首页为选中页面
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#d43a3c",
+    items: [
       {
         "selectedIconPath": "/images/首页选中.jpg",
         "iconPath": "/images/首页未选中.jpg",
@@ -45,9 +31,21 @@
       }
     ]
   },
-  "usingComponents": {
-    "customtabbar": "custom-tab-bar/index"
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
-}
+
+  methods: {
+    swichNav: function (e) {
+      let that = this;
+      if (this.data.currentTab === e.target.dataset.current) {
+        return false;
+      } else {
+        that.setData({
+          currentTab: e.target.dataset.current
+        })
+        let url = "../../" + e.currentTarget.dataset.url;  // 点击tabbar时，跳转对应的页面
+        wx.switchTab({
+          url: url,
+        })
+      }
+    },
+  }
+})
