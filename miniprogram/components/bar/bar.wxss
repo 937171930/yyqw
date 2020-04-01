@@ -1,5 +1,5 @@
 .component {
-  background-color: white;
+  background-color: #eee;
   white-space: nowrap;
   box-sizing: border-box;
 }
@@ -17,10 +17,10 @@
 }
 .bottom-bar {
   position: absolute;
-  height: 2px;
-  border-radius: 2px
+  height: 2rpx;
+  border-radius: 2rpx
 }
 .small {
-  height: 4px;
-  border-radius: 2px;
+  height: 4rpx;
+  border-radius: 2rpx;
 }

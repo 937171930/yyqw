@@ -1,40 +1,39 @@
-<!-- <view class="bottomBar">
-  <top-bar 
-    items="{{['首页', '分类', '购物车', '我的']}}"
-    binditemtap="changeName"
+<view>
+  <top-bar
+    id="myComponent"
+    items="{{items}}"
+    selected="{{currentDataTop}}"
+    binditemtap="checkCurrentTop"
   ></top-bar>
 </view>
 
-<swiper current="{{currentData1}}" class='swiper' style="height:600rpx;" duration="300">
+<swiper current="{{currentDataTop}}" class='swiper' bindchange="bindchangeTop" display-multiple-items="1">
   <swiper-item>
-  </swiper-item>
-
-  <swiper-item> -->
-    <view>
-      <top-bar
-        id="myComponent"
-        items="{{items}}"
-        selected="{{currentDataTop}}"
-        binditemtap="checkCurrentTop"
-      ></top-bar>
+    <view class='swiper_bk'>
+      <view class='iamge_bak' bindtap="heiheihei">
+        <image class='good_img' src='../../images/goods/XM-1.jpg'></image>
+        <view class='good_text'>天龙八部小蜜 天龙八部主线任务升级 双电脑2000答题 自动发货</view>
+        <view class='good_text_bk'>
+          <view class='good_text_much'>￥28.00</view>
+          <view class='good_text_intro'>已售0件</view>
+        </view>
+      </view>
+      <view class='iamge_bak' bindtap="">
+        <image class='good_img' src='../../images/goods/XMDT-1.jpg'></image>
+        <view class='good_text'>新天龙八部 TLBB 小蜜 2000内置答题卡 小蜜答题 自动发货</view>
+        <view class='good_text_bk'>
+          <view class='good_text_much'>￥3.00</view>
+          <view class='good_text_intro'>已售0件</view>
+        </view>
+      </view>
     </view>
-
-    <swiper current="{{currentDataTop}}" class='swiper' style="height:300rpx;" duration="300" bindchange="bindchangeTop">
-      <swiper-item><view class='swiper_con'>welcome come to 代理专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 小蜜专区</view></swiper-item> 
-      <swiper-item><view class='swiper_con'>welcome come to 莫愁如意专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 天机专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 答题器专区</view></swiper-item> 
-      <swiper-item><view class='swiper_con'>welcome come to 多开防封专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 打图工具专区</view></swiper-item>
-      <swiper-item><view class='swiper_con'>welcome come to 白号专区</view></swiper-item> 
-    </swiper>
-  <!-- </swiper-item>
-
-  <swiper-item>
   </swiper-item>
-
-  <swiper-item>
-  </swiper-item>
-</swiper> -->
+  <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
+  <swiper-item><view class='swiper_con'>welcome come to 小蜜专区</view></swiper-item> 
+  <swiper-item><view class='swiper_con'>welcome come to 莫愁如意专区</view></swiper-item>
+  <swiper-item><view class='swiper_con'>welcome come to 天机专区</view></swiper-item>
+  <swiper-item><view class='swiper_con'>welcome come to 答题器专区</view></swiper-item> 
+  <swiper-item><view class='swiper_con'>welcome come to 多开防封专区</view></swiper-item>
+  <swiper-item><view class='swiper_con'>welcome come to 打图工具专区</view></swiper-item>
+  <swiper-item><view class='swiper_con'>welcome come to 白号专区</view></swiper-item> 
+</swiper>

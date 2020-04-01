@@ -16,7 +16,7 @@ page {
   align-items: center;
   justify-content: center;
   flex-direction: column-reverse;
-  background: white;
+  background: #eee;
   height: 140rpx;
 }
 
@@ -27,7 +27,7 @@ page {
 }
 
 .iconPath {
-  width:54rpx;
+  width: 54rpx;
   height: 54rpx;
 }
 
@@ -40,16 +40,16 @@ page {
   text-align: center;
   flex: 1;
   color: #eee;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 28rpx;
 }
 
 .active {
   line-height: 75rpx;
   text-align: center;
-  background-color: #fff;
+  background-color: #eee;
   flex: 1;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 28rpx;
 }
 .active .tab-text {

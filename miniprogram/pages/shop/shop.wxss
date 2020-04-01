@@ -1,10 +1,79 @@
+page {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+
+} 
+
 .swiper {
   width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
 }
- 
+
 .swiper_con {
-  text-align: center;
   width: 100%;
   height: 100%;
-  padding: 80rpx 0;
+}
+ 
+.swiper_bk {
+  width: 100%;
+  height: 560rpx;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.iamge_bak {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  width: 340rpx;
+  height: 520rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.good_img {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 80%;
+}
+.good_text {
+  margin-top: 1%;
+  border-radius: 10rpx;
+  width: 100%;
+  height: 13%;
+  background-color: #f2f2f2;
+  font-size: 22rpx;
+  flex: auto;
+}
+
+.good_text_much {
+  height: 100%;
+  font-size: 24rpx;
+  background-color: #f2f2f2;
+  color: red;
+  flex: 1;
+}
+
+.good_text_intro {
+  height: 100%;
+  font-size: 24rpx;
+  justify-content:flex-end;
+  color: #666;
+}
+
+.good_text_bk {
+  margin-top: 3%;
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items:left;
 }
