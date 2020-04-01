@@ -8,9 +8,11 @@
 </view>
 
 <swiper current="{{currentDataTop}}" class='swiper' bindchange="bindchangeTop" display-multiple-items="1">
+  <swiper-item><view class='swiper_con'>welcome come to 代理专区</view></swiper-item> 
+  <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
   <swiper-item>
     <view class='swiper_bk'>
-      <view class='iamge_bak' bindtap="heiheihei">
+      <view class='iamge_bak' bindtap="TLXM">
         <image class='good_img' src='../../images/goods/XM-1.jpg'></image>
         <view class='good_text'>天龙八部小蜜 天龙八部主线任务升级 双电脑2000答题 自动发货</view>
         <view class='good_text_bk'>
@@ -18,7 +20,7 @@
           <view class='good_text_intro'>已售0件</view>
         </view>
       </view>
-      <view class='iamge_bak' bindtap="">
+      <view class='iamge_bak' bindtap="TLXMDT">
         <image class='good_img' src='../../images/goods/XMDT-1.jpg'></image>
         <view class='good_text'>新天龙八部 TLBB 小蜜 2000内置答题卡 小蜜答题 自动发货</view>
         <view class='good_text_bk'>
@@ -28,8 +30,6 @@
       </view>
     </view>
   </swiper-item>
-  <swiper-item><view class='swiper_con'>welcome come to 好帮手专区</view></swiper-item>
-  <swiper-item><view class='swiper_con'>welcome come to 小蜜专区</view></swiper-item> 
   <swiper-item><view class='swiper_con'>welcome come to 莫愁如意专区</view></swiper-item>
   <swiper-item><view class='swiper_con'>welcome come to 天机专区</view></swiper-item>
   <swiper-item><view class='swiper_con'>welcome come to 答题器专区</view></swiper-item> 
